@@ -13,3 +13,22 @@ const vws = require('vws')
 ```
 
 ### **And enjoy ;)**
+
+# Example:
+```
+const vws = require('vws');
+
+const app = new vws();
+
+app.start(3000, () => {
+    console.log('Server has been started on 3000 port')
+}).logger(); // If you want logger
+
+app.go('/hello', {
+    method: 'GET',
+    encoding: 'UTF-8', // Option, if you want set encoding
+    handler: (req, res) => {
+        res.send('Hello')
+    }
+});
+```
