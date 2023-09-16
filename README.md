@@ -15,7 +15,7 @@ const vws = require('vws')
 ### **And enjoy ;)**
 
 # Example:
-```
+```js
 const vws = require('vws');
 
 const app = new vws();
