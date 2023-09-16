@@ -8,7 +8,7 @@ Pre-beta 1.0.x
 ### create vws folder in node_modules folder and move files to the vws folder
 
 ### Require from modules
-```
+```js
 const vws = require('vws')
 ```
 
