@@ -31,4 +31,7 @@ app.go('/hello', {
         res.send('Hello')
     }
 });
+
+// Fast handler method
+app.go('/justpage', 'GET', (req, res) => { res.send('Hello, im Valgix ;)') })
 ```
