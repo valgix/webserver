@@ -3,9 +3,9 @@ Pre-beta 1.0.x
 
 # Installing
 
-### Download files
-
-### create vws folder in node_modules folder and move files to the vws folder
+```bash
+npm install valgix-ws
+```
 
 ### Require from modules
 ```js
