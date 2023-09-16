@@ -8,6 +8,7 @@ app.start(3000, () => {
 
 app.go('/hello', {
     method: 'GET',
+    encoding: 'UTF-8',
     handler: (req, res) => {
         res.send('Hello')
     }
