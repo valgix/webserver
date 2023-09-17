@@ -1,6 +1,11 @@
 # Valgix Web Server
 Pre-beta 0.2.0
 
+### Install
+```js
+npm install valgix-ws
+```
+
 ### Require from modules
 ```js
 const vws = require('vws')
