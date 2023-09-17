@@ -18,19 +18,33 @@ const vws = require('vws')
 ```js
 const vws = require('vws');
 
-const app = new vws();
+const app = new vws;
 
-app.start(3000, () => {
-    console.log('Server has been started on 3000 port')
-}).logger(); // If you want logger
+app.start(3000, 'localhost', () => {
+    console.log(`Server has been started on ValgixWebServer ;)`)
+}).logger();
 
-app.go('/hello', {
-    method: 'GET',
-    encoding: 'UTF-8', // Option, if you want set encoding
-    handler: (req, res) => {
-        res.send('Hello')
+app.use((req, res, done) => {
+    if(req.url == '/anypage') {
+        return done();
     }
-});
+    
+    res.send('Access denied');
+})
+
+app.go('/', {
+    method: 'GET',
+    handler: (req, res) => {
+        res.send("Hello");
+    }
+})
+
+app.go('/anypage', {
+    method: 'GET',
+    handler: (req, res) => {
+        res.send("This is allowed page ;)");
+    }
+})
 
 // Fast handler method
 app.go('/justpage', 'GET', (req, res) => { res.send('Hello, im Valgix ;)') })
