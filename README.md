@@ -1,5 +1,5 @@
 # Valgix Web Server
-Pre-beta 1.0.x
+Pre-beta 0.2.0
 
 ### Require from modules
 ```js
