@@ -8,24 +8,38 @@ class VWS {
     this.routes = {};
     this.routeArgs = {};
     this.loggerStatus = false;
+    this.middleware = [];
   }
 
   handleRequest(req, res) {
     const url = req.url;
     const method = req.method;
 
+    res.send = function (data) {
+      res.end(data);
+    };
+
+    let doneCalled = false;
+
+    const done = () => {
+      doneCalled = true;
+    };
+
+    for (const middleware of this.middleware) {
+      middleware(req, res, done);
+      if (!doneCalled) break;
+    }
+
+    if (!doneCalled) return;
+
     if (this.routes[url] && this.routes[url][method]) {
       res.statusCode = 200;
       res.setHeader(
         'Content-Type', 
         `text/plain; charset=${this.routeArgs.encoding ? this.routeArgs.encoding : 'UTF-8'}`
-        );
+      );
 
-      res.send = function (data) {
-        res.end(data);
-      };
-
-      if(this.loggerStatus) {
+      if (this.loggerStatus) {
         console.log(
           req.headers['x-forwarded-for'] || req.connection.remoteAddress,
           req.url,
@@ -37,9 +51,10 @@ class VWS {
     } else {
       res.statusCode = 404;
       res.setHeader('Content-Type', 'text/plain; charset=UTF-8');
-      res.end('Request Not Found // '+req.method);
+      res.end('Request Not Found // ' + req.method);
     }
   }
+
 
   start(port, hostname) {
     this.server.listen(port, hostname ? hostname : '127.0.0.1');
@@ -50,6 +65,11 @@ class VWS {
         return this;
       }
     };
+  }
+
+  use(middleware) {
+        this.middleware.push(middleware);
+        return this;
   }
 
   go(url, args, handler) {
