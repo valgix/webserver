@@ -31,7 +31,7 @@ app.go('/', {
 app.go('/justpage', 'GET', (req, res) => { res.send('Hello, im Valgix ;)') })
 ```
 
-#Middleware
+# Middleware
 ```js
 const vws = require('vws');
 
